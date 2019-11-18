@@ -1,0 +1,1403 @@
+
+
+Microchip MPLAB XC8 Assembler V2.10 build 88905656 
+                                                                                               Sat Nov  9 18:37:20 2019
+
+Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1 
+     1                           	processor	18F4550
+     2                           	fnconf	rparam,??,?,0
+     3                           	opt	pw 120
+     4                           	opt	flic
+     5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     6                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1,noexec
+     7                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,noexec
+     8                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    13                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    14                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    15  0000                     
+    16                           ; Version 2.10
+    17                           ; Generated 31/07/2019 GMT
+    18                           ; 
+    19                           ; Copyright © 2019, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    20                           ; All rights reserved.
+    21                           ; 
+    22                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    23                           ; 
+    24                           ; Redistribution and use in source and binary forms, with or without modification, are
+    25                           ; permitted provided that the following conditions are met:
+    26                           ; 
+    27                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    28                           ;        conditions and the following disclaimer.
+    29                           ; 
+    30                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    31                           ;        of conditions and the following disclaimer in the documentation and/or other
+    32                           ;        materials provided with the distribution.
+    33                           ; 
+    34                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    35                           ;        software without specific prior written permission.
+    36                           ; 
+    37                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    38                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    39                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    40                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    41                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    42                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    43                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    44                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    45                           ; 
+    46                           ; 
+    47                           ; Code-generator required, PIC18F4550 Definitions
+    48                           ; 
+    49                           ; SFR Addresses
+    50  0000                     _TRISD	set	3989
+    51  0000                     _TRISB	set	3987
+    52  0000                     _RB5	set	31757
+    53  0000                     _RB3	set	31755
+    54  0000                     _RB4	set	31756
+    55  0000                     _RB2	set	31754
+    56  0000                     _RB0	set	31752
+    57  0000                     _RB1	set	31753
+    58  0000                     _RD1	set	31769
+    59  0000                     _RD0	set	31768
+    60  0000                     _OSCCON	set	4051
+    61                           
+    62                           ; #config settings
+    63  0000                     
+    64                           	psect	cinit
+    65  00798A                     __pcinit:
+    66                           	opt callstack 0
+    67  00798A                     start_initialization:
+    68                           	opt callstack 0
+    69  00798A                     __initialization:
+    70                           	opt callstack 0
+    71                           
+    72                           ; Clear objects allocated to COMRAM (4 bytes)
+    73  00798A  6A0F               	clrf	(__pbssCOMRAM+3)& (0+255),c
+    74  00798C  6A0E               	clrf	(__pbssCOMRAM+2)& (0+255),c
+    75  00798E  6A0D               	clrf	(__pbssCOMRAM+1)& (0+255),c
+    76  007990  6A0C               	clrf	__pbssCOMRAM& (0+255),c
+    77  007992                     end_of_initialization:
+    78                           	opt callstack 0
+    79  007992                     __end_of__initialization:
+    80                           	opt callstack 0
+    81  007992  0100               	movlb	0
+    82  007994  EFCC  F03C         	goto	_main	;jump to C main() function
+    83                           
+    84                           	psect	bssCOMRAM
+    85  00000C                     __pbssCOMRAM:
+    86                           	opt callstack 0
+    87  00000C                     _xb:
+    88                           	opt callstack 0
+    89  00000C                     	ds	2
+    90  00000E                     _xa:
+    91                           	opt callstack 0
+    92  00000E                     	ds	2
+    93                           
+    94                           	psect	cstackCOMRAM
+    95  000001                     __pcstackCOMRAM:
+    96                           	opt callstack 0
+    97  000001                     ??_Forward:
+    98  000001                     ??_Backwards:
+    99  000001                     ??_Right:
+   100  000001                     ??_Left:
+   101  000001                     
+   102                           ; 1 bytes @ 0x0
+   103  000001                     	ds	3
+   104  000004                     Forward@initial_xa:
+   105                           	opt callstack 0
+   106  000004                     Backwards@initial_xa:
+   107                           	opt callstack 0
+   108  000004                     Right@initial_xa:
+   109                           	opt callstack 0
+   110  000004                     Left@initial_xa:
+   111                           	opt callstack 0
+   112                           
+   113                           ; 2 bytes @ 0x3
+   114  000004                     	ds	2
+   115  000006                     Forward@initial_xb:
+   116                           	opt callstack 0
+   117  000006                     Backwards@initial_xb:
+   118                           	opt callstack 0
+   119  000006                     Right@initial_xb:
+   120                           	opt callstack 0
+   121  000006                     Left@initial_xb:
+   122                           	opt callstack 0
+   123                           
+   124                           ; 2 bytes @ 0x5
+   125  000006                     	ds	2
+   126  000008                     Forward@done:
+   127                           	opt callstack 0
+   128  000008                     Backwards@done:
+   129                           	opt callstack 0
+   130  000008                     Right@done:
+   131                           	opt callstack 0
+   132  000008                     Left@done:
+   133                           	opt callstack 0
+   134                           
+   135                           ; 1 bytes @ 0x7
+   136  000008                     	ds	1
+   137  000009                     Forward@S1A_old:
+   138                           	opt callstack 0
+   139  000009                     Backwards@S1A_old:
+   140                           	opt callstack 0
+   141  000009                     Right@S1A_old:
+   142                           	opt callstack 0
+   143  000009                     Left@S1A_old:
+   144                           	opt callstack 0
+   145                           
+   146                           ; 1 bytes @ 0x8
+   147  000009                     	ds	1
+   148  00000A                     Forward@S1B_old:
+   149                           	opt callstack 0
+   150  00000A                     Backwards@S1B_old:
+   151                           	opt callstack 0
+   152  00000A                     Right@S1B_old:
+   153                           	opt callstack 0
+   154  00000A                     Left@S1B_old:
+   155                           	opt callstack 0
+   156                           
+   157                           ; 1 bytes @ 0x9
+   158  00000A                     	ds	1
+   159  00000B                     Forward@chords:
+   160                           	opt callstack 0
+   161  00000B                     Backwards@chords:
+   162                           	opt callstack 0
+   163  00000B                     Right@chords:
+   164                           	opt callstack 0
+   165  00000B                     Left@chords:
+   166                           	opt callstack 0
+   167                           
+   168                           ; 1 bytes @ 0xA
+   169  00000B                     	ds	1
+   170  00000C                     
+   171                           ; 1 bytes @ 0xB
+   172 ;;
+   173 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   174 ;;
+   175 ;; *************** function _main *****************
+   176 ;; Defined at:
+   177 ;;		line 25 in file "main.c"
+   178 ;; Parameters:    Size  Location     Type
+   179 ;;		None
+   180 ;; Auto vars:     Size  Location     Type
+   181 ;;		None
+   182 ;; Return value:  Size  Location     Type
+   183 ;;                  1    wreg      void 
+   184 ;; Registers used:
+   185 ;;		wreg, status,2, status,0, prodl, prodh, cstack
+   186 ;; Tracked objects:
+   187 ;;		On entry : 0/0
+   188 ;;		On exit  : 0/0
+   189 ;;		Unchanged: 0/0
+   190 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   191 ;;      Params:         0       0       0       0       0       0       0       0       0
+   192 ;;      Locals:         0       0       0       0       0       0       0       0       0
+   193 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   194 ;;      Totals:         0       0       0       0       0       0       0       0       0
+   195 ;;Total ram usage:        0 bytes
+   196 ;; Hardware stack levels required when called:    1
+   197 ;; This function calls:
+   198 ;;		_Backwards
+   199 ;;		_Forward
+   200 ;;		_Left
+   201 ;;		_Right
+   202 ;; This function is called by:
+   203 ;;		Startup code after reset
+   204 ;; This function uses a non-reentrant model
+   205 ;;
+   206                           
+   207                           	psect	text0
+   208  007998                     __ptext0:
+   209                           	opt callstack 0
+   210  007998                     _main:
+   211                           	opt callstack 30
+   212  007998                     
+   213                           ;main.c: 27:     OSCCON=0x72;
+   214  007998  0E72               	movlw	114
+   215  00799A  6ED3               	movwf	211,c	;volatile
+   216                           
+   217                           ;main.c: 28:     TRISB=0x00;
+   218  00799C  0E00               	movlw	0
+   219  00799E  6E93               	movwf	147,c	;volatile
+   220                           
+   221                           ;main.c: 29:     TRISD=0x03;
+   222  0079A0  0E03               	movlw	3
+   223  0079A2  6E95               	movwf	149,c	;volatile
+   224  0079A4                     
+   225                           ;main.c: 31:     Forward(1);
+   226  0079A4  0E01               	movlw	1
+   227  0079A6  EC60  F03D         	call	_Forward
+   228  0079AA                     
+   229                           ;main.c: 32:     Backwards(1);
+   230  0079AA  0E01               	movlw	1
+   231  0079AC  ECE0  F03C         	call	_Backwards
+   232  0079B0                     
+   233                           ;main.c: 33:     Right(1);
+   234  0079B0  0E01               	movlw	1
+   235  0079B2  EC60  F03E         	call	_Right
+   236  0079B6                     
+   237                           ;main.c: 34:     Left(1);
+   238  0079B6  0E01               	movlw	1
+   239  0079B8  ECE0  F03D         	call	_Left
+   240  0079BC  EF00  F000         	goto	start
+   241  0079C0                     __end_of_main:
+   242                           	opt callstack 0
+   243                           
+   244 ;; *************** function _Right *****************
+   245 ;; Defined at:
+   246 ;;		line 150 in file "main.c"
+   247 ;; Parameters:    Size  Location     Type
+   248 ;;  chords          1    wreg     unsigned char 
+   249 ;; Auto vars:     Size  Location     Type
+   250 ;;  chords          1   10[COMRAM] unsigned char 
+   251 ;;  initial_xb      2    5[COMRAM] int 
+   252 ;;  initial_xa      2    3[COMRAM] int 
+   253 ;;  S1B_old         1    9[COMRAM] unsigned char 
+   254 ;;  S1A_old         1    8[COMRAM] unsigned char 
+   255 ;;  done            1    7[COMRAM] unsigned char 
+   256 ;; Return value:  Size  Location     Type
+   257 ;;                  1    wreg      void 
+   258 ;; Registers used:
+   259 ;;		wreg, status,2, status,0, prodl, prodh
+   260 ;; Tracked objects:
+   261 ;;		On entry : 0/0
+   262 ;;		On exit  : 0/0
+   263 ;;		Unchanged: 0/0
+   264 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   265 ;;      Params:         0       0       0       0       0       0       0       0       0
+   266 ;;      Locals:         8       0       0       0       0       0       0       0       0
+   267 ;;      Temps:          3       0       0       0       0       0       0       0       0
+   268 ;;      Totals:        11       0       0       0       0       0       0       0       0
+   269 ;;Total ram usage:       11 bytes
+   270 ;; Hardware stack levels used:    1
+   271 ;; This function calls:
+   272 ;;		Nothing
+   273 ;; This function is called by:
+   274 ;;		_main
+   275 ;; This function uses a non-reentrant model
+   276 ;;
+   277                           
+   278                           	psect	text1
+   279  007CC0                     __ptext1:
+   280                           	opt callstack 0
+   281  007CC0                     _Right:
+   282                           	opt callstack 30
+   283                           
+   284                           ;incstack = 0
+   285                           ;Right@chords stored from wreg
+   286  007CC0  6E0B               	movwf	Right@chords^0,c
+   287  007CC2                     
+   288                           ;main.c: 152:     bool done = 0;
+   289  007CC2  0E00               	movlw	0
+   290  007CC4  6E08               	movwf	Right@done^0,c
+   291  007CC6                     
+   292                           ;main.c: 153:     bool S1A_old = RD0;
+   293  007CC6  0E00               	movlw	0
+   294  007CC8  B083               	btfsc	3971,0,c	;volatile
+   295  007CCA  0E01               	movlw	1
+   296  007CCC  6E09               	movwf	Right@S1A_old^0,c
+   297  007CCE                     
+   298                           ;main.c: 154:     bool S1B_old = RD1;
+   299  007CCE  0E00               	movlw	0
+   300  007CD0  B283               	btfsc	3971,1,c	;volatile
+   301  007CD2  0E01               	movlw	1
+   302  007CD4  6E0A               	movwf	Right@S1B_old^0,c
+   303  007CD6                     
+   304                           ;main.c: 156:     int initial_xa = xa;
+   305  007CD6  C00E  F004         	movff	_xa,Right@initial_xa
+   306  007CDA  C00F  F005         	movff	_xa+1,Right@initial_xa+1
+   307  007CDE                     
+   308                           ;main.c: 157:     int initial_xb = xb;
+   309  007CDE  C00C  F006         	movff	_xb,Right@initial_xb
+   310  007CE2  C00D  F007         	movff	_xb+1,Right@initial_xb+1
+   311  007CE6                     
+   312                           ;main.c: 159:     RB1 = 1;
+   313  007CE6  8281               	bsf	3969,1,c	;volatile
+   314  007CE8                     
+   315                           ;main.c: 160:     RB0 = 1;
+   316  007CE8  8081               	bsf	3969,0,c	;volatile
+   317  007CEA                     
+   318                           ;main.c: 161:     RB2 = 0;
+   319  007CEA  9481               	bcf	3969,2,c	;volatile
+   320  007CEC                     
+   321                           ;main.c: 163:     RB4 = 1;
+   322  007CEC  8881               	bsf	3969,4,c	;volatile
+   323  007CEE                     
+   324                           ;main.c: 164:     RB3 = 0;
+   325  007CEE  9681               	bcf	3969,3,c	;volatile
+   326  007CF0                     
+   327                           ;main.c: 165:     RB5 = 1;
+   328  007CF0  8A81               	bsf	3969,5,c	;volatile
+   329                           
+   330                           ;main.c: 167:     while (!done) {
+   331  007CF2  EFD1  F03E         	goto	l72
+   332  007CF6                     l869:
+   333                           
+   334                           ;main.c: 170:         if (RD0 != S1A_old){
+   335  007CF6  0E00               	movlw	0
+   336  007CF8  B083               	btfsc	3971,0,c	;volatile
+   337  007CFA  0E01               	movlw	1
+   338  007CFC  1809               	xorwf	Right@S1A_old^0,w,c
+   339  007CFE  B4D8               	btfsc	status,2,c
+   340  007D00  EF84  F03E         	goto	u111
+   341  007D04  EF86  F03E         	goto	u110
+   342  007D08                     u111:
+   343  007D08  EF8C  F03E         	goto	l875
+   344  007D0C                     u110:
+   345  007D0C                     
+   346                           ;main.c: 171:             xa++;
+   347  007D0C  4A0E               	infsnz	_xa^0,f,c
+   348  007D0E  2A0F               	incf	(_xa+1)^0,f,c
+   349  007D10                     
+   350                           ;main.c: 172:             S1A_old = RD0;
+   351  007D10  0E00               	movlw	0
+   352  007D12  B083               	btfsc	3971,0,c	;volatile
+   353  007D14  0E01               	movlw	1
+   354  007D16  6E09               	movwf	Right@S1A_old^0,c
+   355  007D18                     l875:
+   356                           
+   357                           ;main.c: 175:         if (RD1 != S1B_old){
+   358  007D18  0E00               	movlw	0
+   359  007D1A  B283               	btfsc	3971,1,c	;volatile
+   360  007D1C  0E01               	movlw	1
+   361  007D1E  180A               	xorwf	Right@S1B_old^0,w,c
+   362  007D20  B4D8               	btfsc	status,2,c
+   363  007D22  EF95  F03E         	goto	u121
+   364  007D26  EF97  F03E         	goto	u120
+   365  007D2A                     u121:
+   366  007D2A  EF9D  F03E         	goto	l881
+   367  007D2E                     u120:
+   368  007D2E                     
+   369                           ;main.c: 176:             xb++;
+   370  007D2E  4A0C               	infsnz	_xb^0,f,c
+   371  007D30  2A0D               	incf	(_xb+1)^0,f,c
+   372  007D32                     
+   373                           ;main.c: 177:             S1B_old = RD1;
+   374  007D32  0E00               	movlw	0
+   375  007D34  B283               	btfsc	3971,1,c	;volatile
+   376  007D36  0E01               	movlw	1
+   377  007D38  6E0A               	movwf	Right@S1B_old^0,c
+   378  007D3A                     l881:
+   379                           
+   380                           ;main.c: 181:         if (xa >= initial_xa + chords * 211 || xb >= initial_xb + chords *
+      +                           211){
+   381  007D3A  500B               	movf	Right@chords^0,w,c
+   382  007D3C  0DD3               	mullw	211
+   383  007D3E  CFF3 F001          	movff	prodl,??_Right
+   384  007D42  CFF4 F002          	movff	prodh,??_Right+1
+   385  007D46  5004               	movf	Right@initial_xa^0,w,c
+   386  007D48  2601               	addwf	??_Right^0,f,c
+   387  007D4A  5005               	movf	(Right@initial_xa+1)^0,w,c
+   388  007D4C  2202               	addwfc	(??_Right+1)^0,f,c
+   389  007D4E  5001               	movf	??_Right^0,w,c
+   390  007D50  5C0E               	subwf	_xa^0,w,c
+   391  007D52  500F               	movf	(_xa+1)^0,w,c
+   392  007D54  0A80               	xorlw	128
+   393  007D56  6E03               	movwf	(??_Right+2)^0,c
+   394  007D58  5002               	movf	(??_Right+1)^0,w,c
+   395  007D5A  0A80               	xorlw	128
+   396  007D5C  5803               	subwfb	(??_Right+2)^0,w,c
+   397  007D5E  B0D8               	btfsc	status,0,c
+   398  007D60  EFB4  F03E         	goto	u131
+   399  007D64  EFB6  F03E         	goto	u130
+   400  007D68                     u131:
+   401  007D68  EFCF  F03E         	goto	l885
+   402  007D6C                     u130:
+   403  007D6C  500B               	movf	Right@chords^0,w,c
+   404  007D6E  0DD3               	mullw	211
+   405  007D70  CFF3 F001          	movff	prodl,??_Right
+   406  007D74  CFF4 F002          	movff	prodh,??_Right+1
+   407  007D78  5006               	movf	Right@initial_xb^0,w,c
+   408  007D7A  2601               	addwf	??_Right^0,f,c
+   409  007D7C  5007               	movf	(Right@initial_xb+1)^0,w,c
+   410  007D7E  2202               	addwfc	(??_Right+1)^0,f,c
+   411  007D80  5001               	movf	??_Right^0,w,c
+   412  007D82  5C0C               	subwf	_xb^0,w,c
+   413  007D84  500D               	movf	(_xb+1)^0,w,c
+   414  007D86  0A80               	xorlw	128
+   415  007D88  6E03               	movwf	(??_Right+2)^0,c
+   416  007D8A  5002               	movf	(??_Right+1)^0,w,c
+   417  007D8C  0A80               	xorlw	128
+   418  007D8E  5803               	subwfb	(??_Right+2)^0,w,c
+   419  007D90  A0D8               	btfss	status,0,c
+   420  007D92  EFCD  F03E         	goto	u141
+   421  007D96  EFCF  F03E         	goto	u140
+   422  007D9A                     u141:
+   423  007D9A  EFD1  F03E         	goto	l72
+   424  007D9E                     u140:
+   425  007D9E                     l885:
+   426                           
+   427                           ;main.c: 182:             done = 1;
+   428  007D9E  0E01               	movlw	1
+   429  007DA0  6E08               	movwf	Right@done^0,c
+   430  007DA2                     l72:
+   431                           
+   432                           ;main.c: 167:     while (!done) {
+   433  007DA2  5008               	movf	Right@done^0,w,c
+   434  007DA4  B4D8               	btfsc	status,2,c
+   435  007DA6  EFD7  F03E         	goto	u151
+   436  007DAA  EFD9  F03E         	goto	u150
+   437  007DAE                     u151:
+   438  007DAE  EF7B  F03E         	goto	l869
+   439  007DB2                     u150:
+   440  007DB2                     
+   441                           ;main.c: 188:     RB1 = 1;
+   442  007DB2  8281               	bsf	3969,1,c	;volatile
+   443                           
+   444                           ;main.c: 189:     RB0 = 0;
+   445  007DB4  9081               	bcf	3969,0,c	;volatile
+   446                           
+   447                           ;main.c: 190:     RB2 = 0;
+   448  007DB6  9481               	bcf	3969,2,c	;volatile
+   449                           
+   450                           ;main.c: 192:     RB4 = 1;
+   451  007DB8  8881               	bsf	3969,4,c	;volatile
+   452                           
+   453                           ;main.c: 193:     RB3 = 0;
+   454  007DBA  9681               	bcf	3969,3,c	;volatile
+   455                           
+   456                           ;main.c: 194:     RB5 = 0;
+   457  007DBC  9A81               	bcf	3969,5,c	;volatile
+   458  007DBE  0012               	return		;funcret
+   459  007DC0                     __end_of_Right:
+   460                           	opt callstack 0
+   461                           
+   462 ;; *************** function _Left *****************
+   463 ;; Defined at:
+   464 ;;		line 197 in file "main.c"
+   465 ;; Parameters:    Size  Location     Type
+   466 ;;  chords          1    wreg     unsigned char 
+   467 ;; Auto vars:     Size  Location     Type
+   468 ;;  chords          1   10[COMRAM] unsigned char 
+   469 ;;  initial_xb      2    5[COMRAM] int 
+   470 ;;  initial_xa      2    3[COMRAM] int 
+   471 ;;  S1B_old         1    9[COMRAM] unsigned char 
+   472 ;;  S1A_old         1    8[COMRAM] unsigned char 
+   473 ;;  done            1    7[COMRAM] unsigned char 
+   474 ;; Return value:  Size  Location     Type
+   475 ;;                  1    wreg      void 
+   476 ;; Registers used:
+   477 ;;		wreg, status,2, status,0, prodl, prodh
+   478 ;; Tracked objects:
+   479 ;;		On entry : 0/0
+   480 ;;		On exit  : 0/0
+   481 ;;		Unchanged: 0/0
+   482 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   483 ;;      Params:         0       0       0       0       0       0       0       0       0
+   484 ;;      Locals:         8       0       0       0       0       0       0       0       0
+   485 ;;      Temps:          3       0       0       0       0       0       0       0       0
+   486 ;;      Totals:        11       0       0       0       0       0       0       0       0
+   487 ;;Total ram usage:       11 bytes
+   488 ;; Hardware stack levels used:    1
+   489 ;; This function calls:
+   490 ;;		Nothing
+   491 ;; This function is called by:
+   492 ;;		_main
+   493 ;; This function uses a non-reentrant model
+   494 ;;
+   495                           
+   496                           	psect	text2
+   497  007BC0                     __ptext2:
+   498                           	opt callstack 0
+   499  007BC0                     _Left:
+   500                           	opt callstack 30
+   501                           
+   502                           ;incstack = 0
+   503                           ;Left@chords stored from wreg
+   504  007BC0  6E0B               	movwf	Left@chords^0,c
+   505  007BC2                     
+   506                           ;main.c: 199:     bool done = 0;
+   507  007BC2  0E00               	movlw	0
+   508  007BC4  6E08               	movwf	Left@done^0,c
+   509  007BC6                     
+   510                           ;main.c: 200:     bool S1A_old = RD0;
+   511  007BC6  0E00               	movlw	0
+   512  007BC8  B083               	btfsc	3971,0,c	;volatile
+   513  007BCA  0E01               	movlw	1
+   514  007BCC  6E09               	movwf	Left@S1A_old^0,c
+   515  007BCE                     
+   516                           ;main.c: 201:     bool S1B_old = RD1;
+   517  007BCE  0E00               	movlw	0
+   518  007BD0  B283               	btfsc	3971,1,c	;volatile
+   519  007BD2  0E01               	movlw	1
+   520  007BD4  6E0A               	movwf	Left@S1B_old^0,c
+   521  007BD6                     
+   522                           ;main.c: 203:     int initial_xa = xa;
+   523  007BD6  C00E  F004         	movff	_xa,Left@initial_xa
+   524  007BDA  C00F  F005         	movff	_xa+1,Left@initial_xa+1
+   525  007BDE                     
+   526                           ;main.c: 204:     int initial_xb = xb;
+   527  007BDE  C00C  F006         	movff	_xb,Left@initial_xb
+   528  007BE2  C00D  F007         	movff	_xb+1,Left@initial_xb+1
+   529  007BE6                     
+   530                           ;main.c: 206:     RB1 = 1;
+   531  007BE6  8281               	bsf	3969,1,c	;volatile
+   532  007BE8                     
+   533                           ;main.c: 207:     RB0 = 0;
+   534  007BE8  9081               	bcf	3969,0,c	;volatile
+   535  007BEA                     
+   536                           ;main.c: 208:     RB2 = 1;
+   537  007BEA  8481               	bsf	3969,2,c	;volatile
+   538  007BEC                     
+   539                           ;main.c: 210:     RB4 = 1;
+   540  007BEC  8881               	bsf	3969,4,c	;volatile
+   541  007BEE                     
+   542                           ;main.c: 211:     RB3 = 1;
+   543  007BEE  8681               	bsf	3969,3,c	;volatile
+   544  007BF0                     
+   545                           ;main.c: 212:     RB5 = 0;
+   546  007BF0  9A81               	bcf	3969,5,c	;volatile
+   547                           
+   548                           ;main.c: 214:     while (!done) {
+   549  007BF2  EF51  F03E         	goto	l83
+   550  007BF6                     l909:
+   551                           
+   552                           ;main.c: 217:         if (RD0 != S1A_old){
+   553  007BF6  0E00               	movlw	0
+   554  007BF8  B083               	btfsc	3971,0,c	;volatile
+   555  007BFA  0E01               	movlw	1
+   556  007BFC  1809               	xorwf	Left@S1A_old^0,w,c
+   557  007BFE  B4D8               	btfsc	status,2,c
+   558  007C00  EF04  F03E         	goto	u161
+   559  007C04  EF06  F03E         	goto	u160
+   560  007C08                     u161:
+   561  007C08  EF0C  F03E         	goto	l915
+   562  007C0C                     u160:
+   563  007C0C                     
+   564                           ;main.c: 218:             xa++;
+   565  007C0C  4A0E               	infsnz	_xa^0,f,c
+   566  007C0E  2A0F               	incf	(_xa+1)^0,f,c
+   567  007C10                     
+   568                           ;main.c: 219:             S1A_old = RD0;
+   569  007C10  0E00               	movlw	0
+   570  007C12  B083               	btfsc	3971,0,c	;volatile
+   571  007C14  0E01               	movlw	1
+   572  007C16  6E09               	movwf	Left@S1A_old^0,c
+   573  007C18                     l915:
+   574                           
+   575                           ;main.c: 222:         if (RD1 != S1B_old){
+   576  007C18  0E00               	movlw	0
+   577  007C1A  B283               	btfsc	3971,1,c	;volatile
+   578  007C1C  0E01               	movlw	1
+   579  007C1E  180A               	xorwf	Left@S1B_old^0,w,c
+   580  007C20  B4D8               	btfsc	status,2,c
+   581  007C22  EF15  F03E         	goto	u171
+   582  007C26  EF17  F03E         	goto	u170
+   583  007C2A                     u171:
+   584  007C2A  EF1D  F03E         	goto	l921
+   585  007C2E                     u170:
+   586  007C2E                     
+   587                           ;main.c: 223:             xb++;
+   588  007C2E  4A0C               	infsnz	_xb^0,f,c
+   589  007C30  2A0D               	incf	(_xb+1)^0,f,c
+   590  007C32                     
+   591                           ;main.c: 224:             S1B_old = RD1;
+   592  007C32  0E00               	movlw	0
+   593  007C34  B283               	btfsc	3971,1,c	;volatile
+   594  007C36  0E01               	movlw	1
+   595  007C38  6E0A               	movwf	Left@S1B_old^0,c
+   596  007C3A                     l921:
+   597                           
+   598                           ;main.c: 228:         if (xa >= initial_xa + chords * 211 || xb >= initial_xb + chords *
+      +                           211){
+   599  007C3A  500B               	movf	Left@chords^0,w,c
+   600  007C3C  0DD3               	mullw	211
+   601  007C3E  CFF3 F001          	movff	prodl,??_Left
+   602  007C42  CFF4 F002          	movff	prodh,??_Left+1
+   603  007C46  5004               	movf	Left@initial_xa^0,w,c
+   604  007C48  2601               	addwf	??_Left^0,f,c
+   605  007C4A  5005               	movf	(Left@initial_xa+1)^0,w,c
+   606  007C4C  2202               	addwfc	(??_Left+1)^0,f,c
+   607  007C4E  5001               	movf	??_Left^0,w,c
+   608  007C50  5C0E               	subwf	_xa^0,w,c
+   609  007C52  500F               	movf	(_xa+1)^0,w,c
+   610  007C54  0A80               	xorlw	128
+   611  007C56  6E03               	movwf	(??_Left+2)^0,c
+   612  007C58  5002               	movf	(??_Left+1)^0,w,c
+   613  007C5A  0A80               	xorlw	128
+   614  007C5C  5803               	subwfb	(??_Left+2)^0,w,c
+   615  007C5E  B0D8               	btfsc	status,0,c
+   616  007C60  EF34  F03E         	goto	u181
+   617  007C64  EF36  F03E         	goto	u180
+   618  007C68                     u181:
+   619  007C68  EF4F  F03E         	goto	l925
+   620  007C6C                     u180:
+   621  007C6C  500B               	movf	Left@chords^0,w,c
+   622  007C6E  0DD3               	mullw	211
+   623  007C70  CFF3 F001          	movff	prodl,??_Left
+   624  007C74  CFF4 F002          	movff	prodh,??_Left+1
+   625  007C78  5006               	movf	Left@initial_xb^0,w,c
+   626  007C7A  2601               	addwf	??_Left^0,f,c
+   627  007C7C  5007               	movf	(Left@initial_xb+1)^0,w,c
+   628  007C7E  2202               	addwfc	(??_Left+1)^0,f,c
+   629  007C80  5001               	movf	??_Left^0,w,c
+   630  007C82  5C0C               	subwf	_xb^0,w,c
+   631  007C84  500D               	movf	(_xb+1)^0,w,c
+   632  007C86  0A80               	xorlw	128
+   633  007C88  6E03               	movwf	(??_Left+2)^0,c
+   634  007C8A  5002               	movf	(??_Left+1)^0,w,c
+   635  007C8C  0A80               	xorlw	128
+   636  007C8E  5803               	subwfb	(??_Left+2)^0,w,c
+   637  007C90  A0D8               	btfss	status,0,c
+   638  007C92  EF4D  F03E         	goto	u191
+   639  007C96  EF4F  F03E         	goto	u190
+   640  007C9A                     u191:
+   641  007C9A  EF51  F03E         	goto	l83
+   642  007C9E                     u190:
+   643  007C9E                     l925:
+   644                           
+   645                           ;main.c: 229:             done = 1;
+   646  007C9E  0E01               	movlw	1
+   647  007CA0  6E08               	movwf	Left@done^0,c
+   648  007CA2                     l83:
+   649                           
+   650                           ;main.c: 214:     while (!done) {
+   651  007CA2  5008               	movf	Left@done^0,w,c
+   652  007CA4  B4D8               	btfsc	status,2,c
+   653  007CA6  EF57  F03E         	goto	u201
+   654  007CAA  EF59  F03E         	goto	u200
+   655  007CAE                     u201:
+   656  007CAE  EFFB  F03D         	goto	l909
+   657  007CB2                     u200:
+   658  007CB2                     
+   659                           ;main.c: 235:     RB1 = 1;
+   660  007CB2  8281               	bsf	3969,1,c	;volatile
+   661                           
+   662                           ;main.c: 236:     RB0 = 0;
+   663  007CB4  9081               	bcf	3969,0,c	;volatile
+   664                           
+   665                           ;main.c: 237:     RB2 = 0;
+   666  007CB6  9481               	bcf	3969,2,c	;volatile
+   667                           
+   668                           ;main.c: 239:     RB4 = 1;
+   669  007CB8  8881               	bsf	3969,4,c	;volatile
+   670                           
+   671                           ;main.c: 240:     RB3 = 0;
+   672  007CBA  9681               	bcf	3969,3,c	;volatile
+   673                           
+   674                           ;main.c: 241:     RB5 = 0;
+   675  007CBC  9A81               	bcf	3969,5,c	;volatile
+   676  007CBE  0012               	return		;funcret
+   677  007CC0                     __end_of_Left:
+   678                           	opt callstack 0
+   679                           
+   680 ;; *************** function _Forward *****************
+   681 ;; Defined at:
+   682 ;;		line 58 in file "main.c"
+   683 ;; Parameters:    Size  Location     Type
+   684 ;;  chords          1    wreg     unsigned char 
+   685 ;; Auto vars:     Size  Location     Type
+   686 ;;  chords          1   10[COMRAM] unsigned char 
+   687 ;;  initial_xb      2    5[COMRAM] int 
+   688 ;;  initial_xa      2    3[COMRAM] int 
+   689 ;;  S1B_old         1    9[COMRAM] unsigned char 
+   690 ;;  S1A_old         1    8[COMRAM] unsigned char 
+   691 ;;  done            1    7[COMRAM] unsigned char 
+   692 ;; Return value:  Size  Location     Type
+   693 ;;                  1    wreg      void 
+   694 ;; Registers used:
+   695 ;;		wreg, status,2, status,0, prodl, prodh
+   696 ;; Tracked objects:
+   697 ;;		On entry : 0/0
+   698 ;;		On exit  : 0/0
+   699 ;;		Unchanged: 0/0
+   700 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   701 ;;      Params:         0       0       0       0       0       0       0       0       0
+   702 ;;      Locals:         8       0       0       0       0       0       0       0       0
+   703 ;;      Temps:          3       0       0       0       0       0       0       0       0
+   704 ;;      Totals:        11       0       0       0       0       0       0       0       0
+   705 ;;Total ram usage:       11 bytes
+   706 ;; Hardware stack levels used:    1
+   707 ;; This function calls:
+   708 ;;		Nothing
+   709 ;; This function is called by:
+   710 ;;		_main
+   711 ;; This function uses a non-reentrant model
+   712 ;;
+   713                           
+   714                           	psect	text3
+   715  007AC0                     __ptext3:
+   716                           	opt callstack 0
+   717  007AC0                     _Forward:
+   718                           	opt callstack 30
+   719                           
+   720                           ;incstack = 0
+   721                           ;Forward@chords stored from wreg
+   722  007AC0  6E0B               	movwf	Forward@chords^0,c
+   723  007AC2                     
+   724                           ;main.c: 59:     bool done = 0;
+   725  007AC2  0E00               	movlw	0
+   726  007AC4  6E08               	movwf	Forward@done^0,c
+   727  007AC6                     
+   728                           ;main.c: 60:     bool S1A_old = RD0;
+   729  007AC6  0E00               	movlw	0
+   730  007AC8  B083               	btfsc	3971,0,c	;volatile
+   731  007ACA  0E01               	movlw	1
+   732  007ACC  6E09               	movwf	Forward@S1A_old^0,c
+   733  007ACE                     
+   734                           ;main.c: 61:     bool S1B_old = RD1;
+   735  007ACE  0E00               	movlw	0
+   736  007AD0  B283               	btfsc	3971,1,c	;volatile
+   737  007AD2  0E01               	movlw	1
+   738  007AD4  6E0A               	movwf	Forward@S1B_old^0,c
+   739  007AD6                     
+   740                           ;main.c: 63:     int initial_xa = xa;
+   741  007AD6  C00E  F004         	movff	_xa,Forward@initial_xa
+   742  007ADA  C00F  F005         	movff	_xa+1,Forward@initial_xa+1
+   743  007ADE                     
+   744                           ;main.c: 64:     int initial_xb = xb;
+   745  007ADE  C00C  F006         	movff	_xb,Forward@initial_xb
+   746  007AE2  C00D  F007         	movff	_xb+1,Forward@initial_xb+1
+   747  007AE6                     
+   748                           ;main.c: 66:     RB1 = 1;
+   749  007AE6  8281               	bsf	3969,1,c	;volatile
+   750  007AE8                     
+   751                           ;main.c: 67:     RB0 = 1;
+   752  007AE8  8081               	bsf	3969,0,c	;volatile
+   753  007AEA                     
+   754                           ;main.c: 68:     RB2 = 0;
+   755  007AEA  9481               	bcf	3969,2,c	;volatile
+   756  007AEC                     
+   757                           ;main.c: 70:     RB4 = 1;
+   758  007AEC  8881               	bsf	3969,4,c	;volatile
+   759  007AEE                     
+   760                           ;main.c: 71:     RB3 = 1;
+   761  007AEE  8681               	bsf	3969,3,c	;volatile
+   762  007AF0                     
+   763                           ;main.c: 72:     RB5 = 0;
+   764  007AF0  9A81               	bcf	3969,5,c	;volatile
+   765                           
+   766                           ;main.c: 74:     while (!done) {
+   767  007AF2  EFD1  F03D         	goto	l50
+   768  007AF6                     l789:
+   769                           
+   770                           ;main.c: 77:         if (RD0 != S1A_old){
+   771  007AF6  0E00               	movlw	0
+   772  007AF8  B083               	btfsc	3971,0,c	;volatile
+   773  007AFA  0E01               	movlw	1
+   774  007AFC  1809               	xorwf	Forward@S1A_old^0,w,c
+   775  007AFE  B4D8               	btfsc	status,2,c
+   776  007B00  EF84  F03D         	goto	u11
+   777  007B04  EF86  F03D         	goto	u10
+   778  007B08                     u11:
+   779  007B08  EF8C  F03D         	goto	l795
+   780  007B0C                     u10:
+   781  007B0C                     
+   782                           ;main.c: 78:             xa++;
+   783  007B0C  4A0E               	infsnz	_xa^0,f,c
+   784  007B0E  2A0F               	incf	(_xa+1)^0,f,c
+   785  007B10                     
+   786                           ;main.c: 79:             S1A_old = RD0;
+   787  007B10  0E00               	movlw	0
+   788  007B12  B083               	btfsc	3971,0,c	;volatile
+   789  007B14  0E01               	movlw	1
+   790  007B16  6E09               	movwf	Forward@S1A_old^0,c
+   791  007B18                     l795:
+   792                           
+   793                           ;main.c: 82:         if (RD1 != S1B_old){
+   794  007B18  0E00               	movlw	0
+   795  007B1A  B283               	btfsc	3971,1,c	;volatile
+   796  007B1C  0E01               	movlw	1
+   797  007B1E  180A               	xorwf	Forward@S1B_old^0,w,c
+   798  007B20  B4D8               	btfsc	status,2,c
+   799  007B22  EF95  F03D         	goto	u21
+   800  007B26  EF97  F03D         	goto	u20
+   801  007B2A                     u21:
+   802  007B2A  EF9D  F03D         	goto	l801
+   803  007B2E                     u20:
+   804  007B2E                     
+   805                           ;main.c: 83:             xb++;
+   806  007B2E  4A0C               	infsnz	_xb^0,f,c
+   807  007B30  2A0D               	incf	(_xb+1)^0,f,c
+   808  007B32                     
+   809                           ;main.c: 84:             S1B_old = RD1;
+   810  007B32  0E00               	movlw	0
+   811  007B34  B283               	btfsc	3971,1,c	;volatile
+   812  007B36  0E01               	movlw	1
+   813  007B38  6E0A               	movwf	Forward@S1B_old^0,c
+   814  007B3A                     l801:
+   815                           
+   816                           ;main.c: 88:         if (xa >= initial_xa + chords * 211 || xb >= initial_xb + chords * 
+      +                          211){
+   817  007B3A  500B               	movf	Forward@chords^0,w,c
+   818  007B3C  0DD3               	mullw	211
+   819  007B3E  CFF3 F001          	movff	prodl,??_Forward
+   820  007B42  CFF4 F002          	movff	prodh,??_Forward+1
+   821  007B46  5004               	movf	Forward@initial_xa^0,w,c
+   822  007B48  2601               	addwf	??_Forward^0,f,c
+   823  007B4A  5005               	movf	(Forward@initial_xa+1)^0,w,c
+   824  007B4C  2202               	addwfc	(??_Forward+1)^0,f,c
+   825  007B4E  5001               	movf	??_Forward^0,w,c
+   826  007B50  5C0E               	subwf	_xa^0,w,c
+   827  007B52  500F               	movf	(_xa+1)^0,w,c
+   828  007B54  0A80               	xorlw	128
+   829  007B56  6E03               	movwf	(??_Forward+2)^0,c
+   830  007B58  5002               	movf	(??_Forward+1)^0,w,c
+   831  007B5A  0A80               	xorlw	128
+   832  007B5C  5803               	subwfb	(??_Forward+2)^0,w,c
+   833  007B5E  B0D8               	btfsc	status,0,c
+   834  007B60  EFB4  F03D         	goto	u31
+   835  007B64  EFB6  F03D         	goto	u30
+   836  007B68                     u31:
+   837  007B68  EFCF  F03D         	goto	l805
+   838  007B6C                     u30:
+   839  007B6C  500B               	movf	Forward@chords^0,w,c
+   840  007B6E  0DD3               	mullw	211
+   841  007B70  CFF3 F001          	movff	prodl,??_Forward
+   842  007B74  CFF4 F002          	movff	prodh,??_Forward+1
+   843  007B78  5006               	movf	Forward@initial_xb^0,w,c
+   844  007B7A  2601               	addwf	??_Forward^0,f,c
+   845  007B7C  5007               	movf	(Forward@initial_xb+1)^0,w,c
+   846  007B7E  2202               	addwfc	(??_Forward+1)^0,f,c
+   847  007B80  5001               	movf	??_Forward^0,w,c
+   848  007B82  5C0C               	subwf	_xb^0,w,c
+   849  007B84  500D               	movf	(_xb+1)^0,w,c
+   850  007B86  0A80               	xorlw	128
+   851  007B88  6E03               	movwf	(??_Forward+2)^0,c
+   852  007B8A  5002               	movf	(??_Forward+1)^0,w,c
+   853  007B8C  0A80               	xorlw	128
+   854  007B8E  5803               	subwfb	(??_Forward+2)^0,w,c
+   855  007B90  A0D8               	btfss	status,0,c
+   856  007B92  EFCD  F03D         	goto	u41
+   857  007B96  EFCF  F03D         	goto	u40
+   858  007B9A                     u41:
+   859  007B9A  EFD1  F03D         	goto	l50
+   860  007B9E                     u40:
+   861  007B9E                     l805:
+   862                           
+   863                           ;main.c: 89:             done = 1;
+   864  007B9E  0E01               	movlw	1
+   865  007BA0  6E08               	movwf	Forward@done^0,c
+   866  007BA2                     l50:
+   867                           
+   868                           ;main.c: 74:     while (!done) {
+   869  007BA2  5008               	movf	Forward@done^0,w,c
+   870  007BA4  B4D8               	btfsc	status,2,c
+   871  007BA6  EFD7  F03D         	goto	u51
+   872  007BAA  EFD9  F03D         	goto	u50
+   873  007BAE                     u51:
+   874  007BAE  EF7B  F03D         	goto	l789
+   875  007BB2                     u50:
+   876  007BB2                     
+   877                           ;main.c: 95:     RB1 = 1;
+   878  007BB2  8281               	bsf	3969,1,c	;volatile
+   879                           
+   880                           ;main.c: 96:     RB0 = 0;
+   881  007BB4  9081               	bcf	3969,0,c	;volatile
+   882                           
+   883                           ;main.c: 97:     RB2 = 0;
+   884  007BB6  9481               	bcf	3969,2,c	;volatile
+   885                           
+   886                           ;main.c: 99:     RB4 = 1;
+   887  007BB8  8881               	bsf	3969,4,c	;volatile
+   888                           
+   889                           ;main.c: 100:     RB3 = 0;
+   890  007BBA  9681               	bcf	3969,3,c	;volatile
+   891                           
+   892                           ;main.c: 101:     RB5 = 0;
+   893  007BBC  9A81               	bcf	3969,5,c	;volatile
+   894  007BBE  0012               	return		;funcret
+   895  007BC0                     __end_of_Forward:
+   896                           	opt callstack 0
+   897                           
+   898 ;; *************** function _Backwards *****************
+   899 ;; Defined at:
+   900 ;;		line 104 in file "main.c"
+   901 ;; Parameters:    Size  Location     Type
+   902 ;;  chords          1    wreg     unsigned char 
+   903 ;; Auto vars:     Size  Location     Type
+   904 ;;  chords          1   10[COMRAM] unsigned char 
+   905 ;;  initial_xb      2    5[COMRAM] int 
+   906 ;;  initial_xa      2    3[COMRAM] int 
+   907 ;;  S1B_old         1    9[COMRAM] unsigned char 
+   908 ;;  S1A_old         1    8[COMRAM] unsigned char 
+   909 ;;  done            1    7[COMRAM] unsigned char 
+   910 ;; Return value:  Size  Location     Type
+   911 ;;                  1    wreg      void 
+   912 ;; Registers used:
+   913 ;;		wreg, status,2, status,0, prodl, prodh
+   914 ;; Tracked objects:
+   915 ;;		On entry : 0/0
+   916 ;;		On exit  : 0/0
+   917 ;;		Unchanged: 0/0
+   918 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   919 ;;      Params:         0       0       0       0       0       0       0       0       0
+   920 ;;      Locals:         8       0       0       0       0       0       0       0       0
+   921 ;;      Temps:          3       0       0       0       0       0       0       0       0
+   922 ;;      Totals:        11       0       0       0       0       0       0       0       0
+   923 ;;Total ram usage:       11 bytes
+   924 ;; Hardware stack levels used:    1
+   925 ;; This function calls:
+   926 ;;		Nothing
+   927 ;; This function is called by:
+   928 ;;		_main
+   929 ;; This function uses a non-reentrant model
+   930 ;;
+   931                           
+   932                           	psect	text4
+   933  0079C0                     __ptext4:
+   934                           	opt callstack 0
+   935  0079C0                     _Backwards:
+   936                           	opt callstack 30
+   937                           
+   938                           ;incstack = 0
+   939                           ;Backwards@chords stored from wreg
+   940  0079C0  6E0B               	movwf	Backwards@chords^0,c
+   941  0079C2                     
+   942                           ;main.c: 105:  bool done = 0;
+   943  0079C2  0E00               	movlw	0
+   944  0079C4  6E08               	movwf	Backwards@done^0,c
+   945  0079C6                     
+   946                           ;main.c: 106:     bool S1A_old = RD0;
+   947  0079C6  0E00               	movlw	0
+   948  0079C8  B083               	btfsc	3971,0,c	;volatile
+   949  0079CA  0E01               	movlw	1
+   950  0079CC  6E09               	movwf	Backwards@S1A_old^0,c
+   951  0079CE                     
+   952                           ;main.c: 107:     bool S1B_old = RD1;
+   953  0079CE  0E00               	movlw	0
+   954  0079D0  B283               	btfsc	3971,1,c	;volatile
+   955  0079D2  0E01               	movlw	1
+   956  0079D4  6E0A               	movwf	Backwards@S1B_old^0,c
+   957  0079D6                     
+   958                           ;main.c: 109:     int initial_xa = xa;
+   959  0079D6  C00E  F004         	movff	_xa,Backwards@initial_xa
+   960  0079DA  C00F  F005         	movff	_xa+1,Backwards@initial_xa+1
+   961  0079DE                     
+   962                           ;main.c: 110:     int initial_xb = xb;
+   963  0079DE  C00C  F006         	movff	_xb,Backwards@initial_xb
+   964  0079E2  C00D  F007         	movff	_xb+1,Backwards@initial_xb+1
+   965  0079E6                     
+   966                           ;main.c: 112:     RB1 = 1;
+   967  0079E6  8281               	bsf	3969,1,c	;volatile
+   968  0079E8                     
+   969                           ;main.c: 113:     RB0 = 0;
+   970  0079E8  9081               	bcf	3969,0,c	;volatile
+   971  0079EA                     
+   972                           ;main.c: 114:     RB2 = 1;
+   973  0079EA  8481               	bsf	3969,2,c	;volatile
+   974  0079EC                     
+   975                           ;main.c: 116:     RB4 = 1;
+   976  0079EC  8881               	bsf	3969,4,c	;volatile
+   977  0079EE                     
+   978                           ;main.c: 117:     RB3 = 0;
+   979  0079EE  9681               	bcf	3969,3,c	;volatile
+   980  0079F0                     
+   981                           ;main.c: 118:     RB5 = 1;
+   982  0079F0  8A81               	bsf	3969,5,c	;volatile
+   983                           
+   984                           ;main.c: 120:     while (!done) {
+   985  0079F2  EF51  F03D         	goto	l61
+   986  0079F6                     l829:
+   987                           
+   988                           ;main.c: 123:         if (RD0 != S1A_old){
+   989  0079F6  0E00               	movlw	0
+   990  0079F8  B083               	btfsc	3971,0,c	;volatile
+   991  0079FA  0E01               	movlw	1
+   992  0079FC  1809               	xorwf	Backwards@S1A_old^0,w,c
+   993  0079FE  B4D8               	btfsc	status,2,c
+   994  007A00  EF04  F03D         	goto	u61
+   995  007A04  EF06  F03D         	goto	u60
+   996  007A08                     u61:
+   997  007A08  EF0C  F03D         	goto	l835
+   998  007A0C                     u60:
+   999  007A0C                     
+  1000                           ;main.c: 124:             xa++;
+  1001  007A0C  4A0E               	infsnz	_xa^0,f,c
+  1002  007A0E  2A0F               	incf	(_xa+1)^0,f,c
+  1003  007A10                     
+  1004                           ;main.c: 125:             S1A_old = RD0;
+  1005  007A10  0E00               	movlw	0
+  1006  007A12  B083               	btfsc	3971,0,c	;volatile
+  1007  007A14  0E01               	movlw	1
+  1008  007A16  6E09               	movwf	Backwards@S1A_old^0,c
+  1009  007A18                     l835:
+  1010                           
+  1011                           ;main.c: 128:         if (RD1 != S1B_old){
+  1012  007A18  0E00               	movlw	0
+  1013  007A1A  B283               	btfsc	3971,1,c	;volatile
+  1014  007A1C  0E01               	movlw	1
+  1015  007A1E  180A               	xorwf	Backwards@S1B_old^0,w,c
+  1016  007A20  B4D8               	btfsc	status,2,c
+  1017  007A22  EF15  F03D         	goto	u71
+  1018  007A26  EF17  F03D         	goto	u70
+  1019  007A2A                     u71:
+  1020  007A2A  EF1D  F03D         	goto	l841
+  1021  007A2E                     u70:
+  1022  007A2E                     
+  1023                           ;main.c: 129:             xb++;
+  1024  007A2E  4A0C               	infsnz	_xb^0,f,c
+  1025  007A30  2A0D               	incf	(_xb+1)^0,f,c
+  1026  007A32                     
+  1027                           ;main.c: 130:             S1B_old = RD1;
+  1028  007A32  0E00               	movlw	0
+  1029  007A34  B283               	btfsc	3971,1,c	;volatile
+  1030  007A36  0E01               	movlw	1
+  1031  007A38  6E0A               	movwf	Backwards@S1B_old^0,c
+  1032  007A3A                     l841:
+  1033                           
+  1034                           ;main.c: 134:         if (xa >= initial_xa + chords * 211 || xb >= initial_xb + chords *
+      +                           211){
+  1035  007A3A  500B               	movf	Backwards@chords^0,w,c
+  1036  007A3C  0DD3               	mullw	211
+  1037  007A3E  CFF3 F001          	movff	prodl,??_Backwards
+  1038  007A42  CFF4 F002          	movff	prodh,??_Backwards+1
+  1039  007A46  5004               	movf	Backwards@initial_xa^0,w,c
+  1040  007A48  2601               	addwf	??_Backwards^0,f,c
+  1041  007A4A  5005               	movf	(Backwards@initial_xa+1)^0,w,c
+  1042  007A4C  2202               	addwfc	(??_Backwards+1)^0,f,c
+  1043  007A4E  5001               	movf	??_Backwards^0,w,c
+  1044  007A50  5C0E               	subwf	_xa^0,w,c
+  1045  007A52  500F               	movf	(_xa+1)^0,w,c
+  1046  007A54  0A80               	xorlw	128
+  1047  007A56  6E03               	movwf	(??_Backwards+2)^0,c
+  1048  007A58  5002               	movf	(??_Backwards+1)^0,w,c
+  1049  007A5A  0A80               	xorlw	128
+  1050  007A5C  5803               	subwfb	(??_Backwards+2)^0,w,c
+  1051  007A5E  B0D8               	btfsc	status,0,c
+  1052  007A60  EF34  F03D         	goto	u81
+  1053  007A64  EF36  F03D         	goto	u80
+  1054  007A68                     u81:
+  1055  007A68  EF4F  F03D         	goto	l845
+  1056  007A6C                     u80:
+  1057  007A6C  500B               	movf	Backwards@chords^0,w,c
+  1058  007A6E  0DD3               	mullw	211
+  1059  007A70  CFF3 F001          	movff	prodl,??_Backwards
+  1060  007A74  CFF4 F002          	movff	prodh,??_Backwards+1
+  1061  007A78  5006               	movf	Backwards@initial_xb^0,w,c
+  1062  007A7A  2601               	addwf	??_Backwards^0,f,c
+  1063  007A7C  5007               	movf	(Backwards@initial_xb+1)^0,w,c
+  1064  007A7E  2202               	addwfc	(??_Backwards+1)^0,f,c
+  1065  007A80  5001               	movf	??_Backwards^0,w,c
+  1066  007A82  5C0C               	subwf	_xb^0,w,c
+  1067  007A84  500D               	movf	(_xb+1)^0,w,c
+  1068  007A86  0A80               	xorlw	128
+  1069  007A88  6E03               	movwf	(??_Backwards+2)^0,c
+  1070  007A8A  5002               	movf	(??_Backwards+1)^0,w,c
+  1071  007A8C  0A80               	xorlw	128
+  1072  007A8E  5803               	subwfb	(??_Backwards+2)^0,w,c
+  1073  007A90  A0D8               	btfss	status,0,c
+  1074  007A92  EF4D  F03D         	goto	u91
+  1075  007A96  EF4F  F03D         	goto	u90
+  1076  007A9A                     u91:
+  1077  007A9A  EF51  F03D         	goto	l61
+  1078  007A9E                     u90:
+  1079  007A9E                     l845:
+  1080                           
+  1081                           ;main.c: 135:             done = 1;
+  1082  007A9E  0E01               	movlw	1
+  1083  007AA0  6E08               	movwf	Backwards@done^0,c
+  1084  007AA2                     l61:
+  1085                           
+  1086                           ;main.c: 120:     while (!done) {
+  1087  007AA2  5008               	movf	Backwards@done^0,w,c
+  1088  007AA4  B4D8               	btfsc	status,2,c
+  1089  007AA6  EF57  F03D         	goto	u101
+  1090  007AAA  EF59  F03D         	goto	u100
+  1091  007AAE                     u101:
+  1092  007AAE  EFFB  F03C         	goto	l829
+  1093  007AB2                     u100:
+  1094  007AB2                     
+  1095                           ;main.c: 141:     RB1 = 1;
+  1096  007AB2  8281               	bsf	3969,1,c	;volatile
+  1097                           
+  1098                           ;main.c: 142:     RB0 = 0;
+  1099  007AB4  9081               	bcf	3969,0,c	;volatile
+  1100                           
+  1101                           ;main.c: 143:     RB2 = 0;
+  1102  007AB6  9481               	bcf	3969,2,c	;volatile
+  1103                           
+  1104                           ;main.c: 145:     RB4 = 1;
+  1105  007AB8  8881               	bsf	3969,4,c	;volatile
+  1106                           
+  1107                           ;main.c: 146:     RB3 = 0;
+  1108  007ABA  9681               	bcf	3969,3,c	;volatile
+  1109                           
+  1110                           ;main.c: 147:     RB5 = 0;
+  1111  007ABC  9A81               	bcf	3969,5,c	;volatile
+  1112  007ABE  0012               	return		;funcret
+  1113  007AC0                     __end_of_Backwards:
+  1114                           	opt callstack 0
+  1115  0000                     
+  1116                           	psect	rparam
+  1117  0000                     tosu	equ	0xFFF
+  1118                           tosh	equ	0xFFE
+  1119                           tosl	equ	0xFFD
+  1120                           stkptr	equ	0xFFC
+  1121                           pclatu	equ	0xFFB
+  1122                           pclath	equ	0xFFA
+  1123                           pcl	equ	0xFF9
+  1124                           tblptru	equ	0xFF8
+  1125                           tblptrh	equ	0xFF7
+  1126                           tblptrl	equ	0xFF6
+  1127                           tablat	equ	0xFF5
+  1128                           prodh	equ	0xFF4
+  1129                           prodl	equ	0xFF3
+  1130                           indf0	equ	0xFEF
+  1131                           postinc0	equ	0xFEE
+  1132                           postdec0	equ	0xFED
+  1133                           preinc0	equ	0xFEC
+  1134                           plusw0	equ	0xFEB
+  1135                           fsr0h	equ	0xFEA
+  1136                           fsr0l	equ	0xFE9
+  1137                           wreg	equ	0xFE8
+  1138                           indf1	equ	0xFE7
+  1139                           postinc1	equ	0xFE6
+  1140                           postdec1	equ	0xFE5
+  1141                           preinc1	equ	0xFE4
+  1142                           plusw1	equ	0xFE3
+  1143                           fsr1h	equ	0xFE2
+  1144                           fsr1l	equ	0xFE1
+  1145                           bsr	equ	0xFE0
+  1146                           indf2	equ	0xFDF
+  1147                           postinc2	equ	0xFDE
+  1148                           postdec2	equ	0xFDD
+  1149                           preinc2	equ	0xFDC
+  1150                           plusw2	equ	0xFDB
+  1151                           fsr2h	equ	0xFDA
+  1152                           fsr2l	equ	0xFD9
+  1153                           status	equ	0xFD8
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         4
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     11      15
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           244      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+    BANK6           256      0       0
+    BANK7           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    _main->_Backwards
+    _main->_Forward
+    _main->_Left
+    _main->_Right
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 0     0      0     420
+                          _Backwards
+                            _Forward
+                               _Left
+                              _Right
+ ---------------------------------------------------------------------------------
+ (1) _Right                                               11    11      0     105
+                                              0 COMRAM    11    11      0
+ ---------------------------------------------------------------------------------
+ (1) _Left                                                11    11      0     105
+                                              0 COMRAM    11    11      0
+ ---------------------------------------------------------------------------------
+ (1) _Forward                                             11    11      0     105
+                                              0 COMRAM    11    11      0
+ ---------------------------------------------------------------------------------
+ (1) _Backwards                                           11    11      0     105
+                                              0 COMRAM    11    11      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _Backwards
+   _Forward
+   _Left
+   _Right
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM_1           400      0       0      21        0.0%
+BIGRAM             3F3      0       0      22        0.0%
+EEDATA             100      0       0       0        0.0%
+BITBANK7           100      0       0      19        0.0%
+BANK7              100      0       0      20        0.0%
+BITBANK6           100      0       0      17        0.0%
+BANK6              100      0       0      18        0.0%
+BITBANK5           100      0       0      15        0.0%
+BANK5              100      0       0      16        0.0%
+BITBANK4           100      0       0      13        0.0%
+BANK4              100      0       0      14        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK3            F4      0       0      12        0.0%
+BANK3               F4      0       0      10        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITCOMRAM           5F      0       0       0        0.0%
+COMRAM              5F      B       F       1       15.8%
+BITSFR_5             0      0       0     200        0.0%
+SFR_5                0      0       0     200        0.0%
+BITSFR_4             0      0       0     200        0.0%
+SFR_4                0      0       0     200        0.0%
+BITSFR_3             0      0       0     200        0.0%
+SFR_3                0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+STACK                0      0       0       2        0.0%
+NULL                 0      0       0       0        0.0%
+ABS                  0      0       F      11        0.0%
+DATA                 0      0       F       3        0.0%
+CODE                 0      0       0       0        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.10 build 88905656 
+Symbol Table                                                                                   Sat Nov  9 18:37:20 2019
+
+                     l50 7BA2                       l61 7AA2                       l39 79BC  
+                     l80 7DBE                       l72 7DA2                       l57 7BB2  
+                     l58 7BBE                       l90 7CB2                       l91 7CBE  
+                     l83 7CA2                       l68 7AB2                       l69 7ABE  
+                     l79 7DB2                       u10 7B0C                       u11 7B08  
+                     u20 7B2E                       u21 7B2A                       u30 7B6C  
+                     u31 7B68                       u40 7B9E                       u41 7B9A  
+                     u50 7BB2                       u51 7BAE                       u60 7A0C  
+                     u61 7A08                       u70 7A2E                       u71 7A2A  
+                     u80 7A6C                       u81 7A68                       u90 7A9E  
+                     u91 7A9A              __CFG_BOR$ON 000000                       _xa 000E  
+                     _xb 000C              __CFG_BORV$3 000000             __CFG_CP0$OFF 000000  
+           __CFG_CP1$OFF 000000             __CFG_CP2$OFF 000000             __CFG_CP3$OFF 000000  
+            __CFG_LVP$ON 000000                      l801 7B3A                      l811 79CE  
+                    l803 7B6C                      l821 79EA                      l813 79D6  
+                    l805 7B9E                      l901 7BEA                      l831 7A0C  
+                    l823 79EC                      l815 79DE                      l807 79C2  
+                    l911 7C0C                      l903 7BEC                      l841 7A3A  
+                    l833 7A10                      l825 79EE                      l817 79E6  
+                    l809 79C6                      l921 7C3A                      l913 7C10  
+                    l905 7BEE                      l843 7A6C                      l835 7A18  
+                    l827 79F0                      l819 79E8                      l771 7ACE  
+                    l923 7C6C                      l915 7C18                      l907 7BF0  
+                    l851 7CCE                      l931 79AA                      l845 7A9E  
+                    l837 7A2E                      l829 79F6                      l781 7AEA  
+                    l773 7AD6                      l925 7C9E                      l917 7C2E  
+                    l909 7BF6                      l861 7CEA                      l853 7CD6  
+                    l933 79B0                      l839 7A32                      l791 7B0C  
+                    l783 7AEC                      l775 7ADE                      l767 7AC2  
+                    l919 7C32                      l871 7D0C                      l863 7CEC  
+                    l855 7CDE                      l847 7CC2                      l935 79B6  
+                    l927 7998                      l793 7B10                      l785 7AEE  
+                    l777 7AE6                      l769 7AC6                      l881 7D3A  
+                    l873 7D10                      l865 7CEE                      l857 7CE6  
+                    l849 7CC6                      l929 79A4                      l795 7B18  
+                    l787 7AF0                      l779 7AE8                      l891 7BCE  
+                    l883 7D6C                      l875 7D18                      l867 7CF0  
+                    l859 7CE8                      l797 7B2E                      l789 7AF6  
+                    l893 7BD6                      l885 7D9E                      l877 7D2E  
+                    l869 7CF6                      l799 7B32                      l895 7BDE  
+                    l887 7BC2                      l879 7D32                      l897 7BE6  
+                    l889 7BC6                      l899 7BE8             __CFG_CPB$OFF 000000  
+                    _RB0 007C08                      _RB1 007C09                      _RB2 007C0A  
+                    _RB3 007C0B                      _RD0 007C18                      _RB4 007C0C  
+                    _RD1 007C19                      _RB5 007C0D                      u100 7AB2  
+                    u101 7AAE                      u110 7D0C                      u111 7D08  
+                    u200 7CB2                      u120 7D2E                      u201 7CAE  
+                    u121 7D2A                      u130 7D6C                      u131 7D68  
+                    u140 7D9E                      u141 7D9A                      u150 7DB2  
+                    u151 7DAE                      u160 7C0C                      u161 7C08  
+                    u170 7C2E                      u171 7C2A                      u180 7C6C  
+                    u181 7C68                      u190 7C9E                      u191 7C9A  
+           __CFG_CPD$OFF 000000        Forward@initial_xa 0004        Forward@initial_xb 0006  
+           __CFG_WDT$OFF 000000                     _Left 7BC0                     _main 7998  
+                   prodh 000FF4                     prodl 000FF3                     start 0000  
+          __CFG_IESO$OFF 000000           Forward@S1A_old 0009           Forward@S1B_old 000A  
+           ___param_bank 000000          __end_of_Forward 7BC0            __CFG_PLLDIV$1 000000  
+                  ?_Left 0001           __CFG_CCP2MX$ON 000000                    ?_main 0001  
+          __CFG_USBDIV$1 000000                    _TRISB 000F93                    _TRISD 000F95  
+          __CFG_PWRT$OFF 000000            __CFG_WRT0$OFF 000000            __CFG_WRT1$OFF 000000  
+          __CFG_WRT2$OFF 000000            __CFG_WRT3$OFF 000000           __CFG_EBTR0$OFF 000000  
+         __CFG_FCMEN$OFF 000000           __CFG_EBTR1$OFF 000000           __CFG_EBTR2$OFF 000000  
+                  _Right 7CC0           __CFG_EBTR3$OFF 000000            __CFG_WRTB$OFF 000000  
+          __CFG_WRTC$OFF 000000            __CFG_WRTD$OFF 000000           __CFG_EBTRB$OFF 000000  
+                  status 000FD8           __CFG_ICPRT$OFF 000000       __size_of_Backwards 0100  
+         __CFG_MCLRE$OFF 000000             __end_of_Left 7CC0          __initialization 798A  
+           __end_of_main 79C0              Forward@done 0008                   ??_Left 0001  
+                 ??_main 000C          Backwards@chords 000B            __activetblptr 000000  
+                 ?_Right 0001                   _OSCCON 000FD3                ??_Forward 0001  
+         __CFG_XINST$OFF 000000           __CFG_STVREN$ON 000000        __end_of_Backwards 7AC0  
+       Backwards@S1A_old 0009         Backwards@S1B_old 000A               __accesstop 0060  
+__end_of__initialization 7992          __CFG_PBADEN$OFF 000000            ___rparam_used 000001  
+         __pcstackCOMRAM 0001            __end_of_Right 7DC0              Right@chords 000B  
+                ??_Right 0001          __CFG_VREGEN$OFF 000000                  _Forward 7AC0  
+                __Hparam 0000                  __Lparam 0000                  __pcinit 798A  
+                __ramtop 0800                  __ptext0 7998                  __ptext1 7CC0  
+                __ptext2 7BC0                  __ptext3 7AC0                  __ptext4 79C0  
+   end_of_initialization 7992                _Backwards 79C0      Backwards@initial_xa 0004  
+    Backwards@initial_xb 0006             Right@S1A_old 0009             Right@S1B_old 000A  
+          Backwards@done 0008            Forward@chords 000B      start_initialization 798A  
+              Right@done 0008               ?_Backwards 0001         __CFG_LPT1OSC$OFF 000000  
+            __pbssCOMRAM 000C                 ?_Forward 0001          Right@initial_xa 0004  
+        Right@initial_xb 0006           __size_of_Right 0100              ??_Backwards 0001  
+       __CFG_WDTPS$32768 000000                 Left@done 0008                 __Hrparam 0000  
+       __size_of_Forward 0100                 __Lrparam 0000            __size_of_Left 0100  
+          __size_of_main 0028    __CFG_CPUDIV$OSC1_PLL2 000000              Left@S1A_old 0009  
+            Left@S1B_old 000A      __CFG_FOSC$INTOSC_EC 000000           Left@initial_xa 0004  
+         Left@initial_xb 0006               Left@chords 000B  

@@ -1,0 +1,148 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F4550 ]
+[d frameptr 4065 ]
+"4 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"10 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 /Applications/microchip/xc8/v2.10/pic/sources/c99/common/Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"25 /Users/mohamadorabi/Downloads/Rover.X/main.c
+[v _main main `(v  1 e 1 0 ]
+"58
+[v _Forward Forward `(v  1 e 1 0 ]
+"104
+[v _Backwards Backwards `(v  1 e 1 0 ]
+"150
+[v _Right Right `(v  1 e 1 0 ]
+"197
+[v _Left Left `(v  1 e 1 0 ]
+"3625 /Applications/microchip/xc8/v2.10/pic/include/pic18f4550.h
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"4001
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+"7986
+[v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
+"10359
+[v _RB0 RB0 `VEb  1 e 0 @31752 ]
+"10362
+[v _RB1 RB1 `VEb  1 e 0 @31753 ]
+"10365
+[v _RB2 RB2 `VEb  1 e 0 @31754 ]
+"10368
+[v _RB3 RB3 `VEb  1 e 0 @31755 ]
+"10371
+[v _RB4 RB4 `VEb  1 e 0 @31756 ]
+"10374
+[v _RB5 RB5 `VEb  1 e 0 @31757 ]
+"10455
+[v _RD0 RD0 `VEb  1 e 0 @31768 ]
+"10458
+[v _RD1 RD1 `VEb  1 e 0 @31769 ]
+"22 /Users/mohamadorabi/Downloads/Rover.X/main.c
+[v _xa xa `i  1 e 2 0 ]
+"23
+[v _xb xb `i  1 e 2 0 ]
+"25
+[v _main main `(v  1 e 1 0 ]
+{
+"49
+} 0
+"150
+[v _Right Right `(v  1 e 1 0 ]
+{
+[v Right@chords chords `uc  1 a 1 wreg ]
+"157
+[v Right@initial_xb initial_xb `i  1 a 2 5 ]
+"156
+[v Right@initial_xa initial_xa `i  1 a 2 3 ]
+"154
+[v Right@S1B_old S1B_old `uc  1 a 1 9 ]
+"153
+[v Right@S1A_old S1A_old `uc  1 a 1 8 ]
+"152
+[v Right@done done `uc  1 a 1 7 ]
+"150
+[v Right@chords chords `uc  1 a 1 wreg ]
+"152
+[v Right@chords chords `uc  1 a 1 10 ]
+"195
+} 0
+"197
+[v _Left Left `(v  1 e 1 0 ]
+{
+[v Left@chords chords `uc  1 a 1 wreg ]
+"204
+[v Left@initial_xb initial_xb `i  1 a 2 5 ]
+"203
+[v Left@initial_xa initial_xa `i  1 a 2 3 ]
+"201
+[v Left@S1B_old S1B_old `uc  1 a 1 9 ]
+"200
+[v Left@S1A_old S1A_old `uc  1 a 1 8 ]
+"199
+[v Left@done done `uc  1 a 1 7 ]
+"197
+[v Left@chords chords `uc  1 a 1 wreg ]
+"199
+[v Left@chords chords `uc  1 a 1 10 ]
+"242
+} 0
+"58
+[v _Forward Forward `(v  1 e 1 0 ]
+{
+[v Forward@chords chords `uc  1 a 1 wreg ]
+"64
+[v Forward@initial_xb initial_xb `i  1 a 2 5 ]
+"63
+[v Forward@initial_xa initial_xa `i  1 a 2 3 ]
+"61
+[v Forward@S1B_old S1B_old `uc  1 a 1 9 ]
+"60
+[v Forward@S1A_old S1A_old `uc  1 a 1 8 ]
+"59
+[v Forward@done done `uc  1 a 1 7 ]
+"58
+[v Forward@chords chords `uc  1 a 1 wreg ]
+[v Forward@chords chords `uc  1 a 1 10 ]
+"102
+} 0
+"104
+[v _Backwards Backwards `(v  1 e 1 0 ]
+{
+[v Backwards@chords chords `uc  1 a 1 wreg ]
+"110
+[v Backwards@initial_xb initial_xb `i  1 a 2 5 ]
+"109
+[v Backwards@initial_xa initial_xa `i  1 a 2 3 ]
+"107
+[v Backwards@S1B_old S1B_old `uc  1 a 1 9 ]
+"106
+[v Backwards@S1A_old S1A_old `uc  1 a 1 8 ]
+"105
+[v Backwards@done done `uc  1 a 1 7 ]
+"104
+[v Backwards@chords chords `uc  1 a 1 wreg ]
+[v Backwards@chords chords `uc  1 a 1 10 ]
+"148
+} 0
